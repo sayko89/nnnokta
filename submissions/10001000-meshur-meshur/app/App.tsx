@@ -92,17 +92,17 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#f0f0f5', paddingTop: 50 },
-  header: { fontSize: 20, fontWeight: 'bold', textAlign: 'center', marginBottom: 10 },
-  chatArea: { flex: 1, padding: 10 },
-  placeholderText: { textAlign: 'center', color: '#888', marginTop: 20 },
-  msgAi: { alignSelf: 'flex-start', backgroundColor: '#e5e5ea', padding: 10, borderRadius: 10, marginVertical: 5, maxWidth: '80%' },
-  msgUser: { alignSelf: 'flex-end', backgroundColor: '#007aff', padding: 10, borderRadius: 10, marginVertical: 5, maxWidth: '80%' },
-  textAi: { color: '#000' },
-  textUser: { color: '#fff' },
-  inputArea: { flexDirection: 'row', padding: 10, borderTopWidth: 1, borderColor: '#ccc', backgroundColor: '#fff' },
-  input: { flex: 1, borderWidth: 1, borderColor: '#ccc', borderRadius: 5, padding: 10, marginRight: 10 },
-  specArea: { flex: 1, padding: 20, backgroundColor: '#fff', margin: 10, borderRadius: 10 },
-  specHeader: { fontSize: 22, fontWeight: 'bold', marginBottom: 20 },
-  specProp: { fontSize: 16, marginBottom: 10, borderBottomWidth: 1, borderBottomColor: '#eee', paddingBottom: 5 }
+  container: { flex: 1, backgroundColor: '#f9f9fb', paddingTop: 60, paddingBottom: 20 },
+  header: { fontSize: 24, fontWeight: '800', textAlign: 'center', marginBottom: 15, color: '#1c1c1e' },
+  chatArea: { flex: 1, padding: 15 },
+  placeholderText: { textAlign: 'center', color: '#8e8e93', marginTop: 30, fontStyle: 'italic' },
+  msgAi: { alignSelf: 'flex-start', backgroundColor: '#e5e5ea', padding: 12, borderRadius: 18, marginVertical: 6, maxWidth: '85%' },
+  msgUser: { alignSelf: 'flex-end', backgroundColor: '#007aff', padding: 12, borderRadius: 18, marginVertical: 6, maxWidth: '85%' },
+  textAi: { color: '#000', fontSize: 16 },
+  textUser: { color: '#fff', fontSize: 16 },
+  inputArea: { flexDirection: 'row', padding: 15, borderTopWidth: 1, borderColor: '#e5e5ea', backgroundColor: '#fff', alignItems: 'center' },
+  input: { flex: 1, borderWidth: 1, borderColor: '#d1d1d6', borderRadius: 20, paddingHorizontal: 15, paddingVertical: 10, marginRight: 10, fontSize: 16 },
+  specArea: { flex: 1, padding: 25, backgroundColor: '#fff', margin: 15, borderRadius: 15, shadowColor: '#000', shadowOpacity: 0.1, shadowRadius: 10, elevation: 5 },
+  specHeader: { fontSize: 26, fontWeight: '800', marginBottom: 25, color: '#007aff' },
+  specProp: { fontSize: 17, marginBottom: 15, borderBottomWidth: 1, borderBottomColor: '#f2f2f7', paddingBottom: 10, color: '#3a3a3c' }
 });

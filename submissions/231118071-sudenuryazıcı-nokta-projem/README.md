@@ -33,6 +33,11 @@ Bu proje, Nokta Solo Seferi (Misyon Süresi: 2 Saat) kapsamında geliştirilmiş
 - **Teknoloji Seçimi:** Expo Router + TypeScript + Tabs Template seçildi.
 - **App Setup:** `npx create-expo-app` komutu ile temel proje iskeleti kuruldu.
 
+### 2026-04-17 12:12
+- **Fonksiyonel Akış:** Ana sayfadaki buton Alert fonksiyonu ile canlandırıldı.
+- **Dark Theme Tutarlılığı:** History ve Modal sayfaları koyu tema ve Glassmorphism tasarımına uygun hale getirildi.
+- **İçerik:** Modal sayfasına "Hakkında" metni, History sayfasına "Henüz bir nokta bulunmuyor" placeholder metni eklendi.
+
 ---
 
 ### Proje Yapısı

@@ -45,7 +45,7 @@ Expo Go QR: [expo start çalıştırınca çıkan QR kodunun linkini buraya yaz]
 
 > 60 saniye içinde: fikir gir → 5 soruyu cevapla → spec kartını göster
 
-Demo Link: [YouTube/Drive linki buraya]
+Demo Link: [[YouTube/Drive linki buraya](https://youtube.com/shorts/TEkptZhPuC0?si=Zz_PoZMn3wVxmscc)]
 
 ---
 

@@ -1,36 +1,22 @@
-# Nokta — Idea Processing (Track A)
-
-Bu klasör, Nokta Away Mission kapsamında **Track A: Dot Capture & Enrich (Spec-Gen)** yolunda geliştirilen projeyi içermektedir.
-
-**Öğrenci No:** 231118063
-**Seçilen Yol:** Track A (Spec-Gen)
+# Nokta — Idea Processing (Track A: Spec-Gen)
 
 ## Proje Vizyonu
 Kullanıcılardan gelen ham ve dağınık fikirleri (nokta), mühendislik disipliniyle sorgulayan ve bunları ayağı yere basan profesyonel teknik spesifikasyonlara (spec) dönüştüren otonom bir asistan.
 
 ## Teslimat İçeriği
-<<<<<<< HEAD
-- [x] Expo Linki: [https://expo.dev/accounts/aatesoglu/projects/nokta-spec-gen/updates/7c29875a-6d06-43fc-8563-fb01eb50f305](https://expo.dev/accounts/aatesoglu/projects/nokta-spec-gen/updates/7c29875a-6d06-43fc-8563-fb01eb50f305)
-- [ ] Demo Video: [YouTube/Drive Linki] (Geliştirme aşamasında)
-- [x] APK: [app-release.apk](./app-release.apk)
-=======
--  Expo Linki: [https://expo.dev/@aatesoglu/nokta-spec-gen](https://expo.dev/@aatesoglu/nokta-spec-gen)
--  Demo Video: [https://youtu.be/smqaeb8w1Pw]
--  APK: [app-release.apk](./app-release.apk)
->>>>>>> 22469107c00ae68d94f3544e74ea9adebaaee440
+- [x] **Expo Linki:** [https://expo.dev/accounts/aatesoglu/projects/nokta-spec-gen/updates/7c29875a-6d06-43fc-8563-fb01eb50f305](https://expo.dev/accounts/aatesoglu/projects/nokta-spec-gen/updates/7c29875a-6d06-43fc-8563-fb01eb50f305)
+- [x] **Demo Video:** [Nokta App Demo](https://www.youtube.com/watch?v=smqaeb8w1Pw)
+- [x] **APK Dosyası:** [app-release.apk](./app-release.apk)
 
 ## Karar Günlüğü (Decision Log)
+1. **SDK 54 Güncellemesi:** Test edilen cihazlarla tam uyum sağlamak için proje Expo SDK 54 sürümüne yükseltildi.
+2. **Glassmorphism Tasarımı:** Kullanıcı deneyimini artırmak için modern, şeffaf katmanlı bir UI benimsendi.
+3. **Mühendislik Filtreleri:** Ham fikirleri işlemek için 5 kritik mühendislik sorusu (Pain Point, Constraints, Success Metrics, Persona, MVP) temel alındı.
 
-### 1. Mimari Kararlar
-- **Expo Framework:** Hızlı prototipleme ve kolay test için Expo seçildi.
-- **Local Template Engine:** Ücretsiz ve sınırsız kullanım için önceden tanımlanmış mühendislik soruları ve dinamik spec şablonları kullanıldı.
-- **Premium UI:** Modern bir kullanıcı deneyimi için Koyu Tema (Dark Mode) ve Glassmorphism (Cam Dokusu) estetiği benimsendi.
-
-### 2. Teknoloji Yığını
-- **Core:** React Native + Expo
-- **Styling:** StyleSheet (Vanilla CSS benzeri yapı)
-- **Navigation:** React Navigation (Stack)
-- **Icons:** Lucide React Native / Expo Icons
+## Proje Yapısı
+- `app/`: React Native / Expo uygulama kodları.
+- `idea.md`: Projenin mühendislik felsefesi ve metodolojisi.
+- `app-release.apk`: Android kurulum dosyası.
 
 ---
-*Bu proje Nokta felsefesine (No-Slop) sadık kalınarak geliştirilmiştir.*
+*231118063 - aatesoglu*

@@ -1,5 +1,5 @@
 import React from "react";
-import { ActivityIndicator, Pressable, StyleSheet, Text } from "react-native";
+import { ActivityIndicator, Pressable, StyleSheet, Text, View } from "react-native";
 import { colors, radius, spacing } from "../constants/theme";
 
 export default function PrimaryButton({
@@ -18,44 +18,59 @@ export default function PrimaryButton({
       style={({ pressed }) => [
         styles.button,
         isGhost ? styles.ghostButton : styles.primaryButton,
-        (disabled || loading) && styles.disabledButton,
-        pressed && !disabled && !loading && styles.pressedButton
+        pressed && !disabled && !loading && (isGhost ? styles.ghostPressed : styles.primaryPressed),
+        (disabled || loading) && styles.disabledButton
       ]}
     >
-      {loading ? (
-        <ActivityIndicator color={isGhost ? colors.primary : "#FFFFFF"} />
-      ) : (
-        <Text style={[styles.text, isGhost ? styles.ghostText : styles.primaryText]}>{title}</Text>
-      )}
+      <View style={styles.content}>
+        {loading ? (
+          <ActivityIndicator color={isGhost ? colors.primary : "#FFFFFF"} />
+        ) : (
+          <Text style={[styles.text, isGhost ? styles.ghostText : styles.primaryText]}>{title}</Text>
+        )}
+      </View>
     </Pressable>
   );
 }
 
 const styles = StyleSheet.create({
   button: {
-    minHeight: 52,
+    minHeight: 56,
     borderRadius: radius.md,
+    paddingHorizontal: spacing.lg,
+    justifyContent: "center"
+  },
+  content: {
     alignItems: "center",
-    justifyContent: "center",
-    paddingHorizontal: spacing.lg
+    justifyContent: "center"
   },
   primaryButton: {
-    backgroundColor: colors.primary
+    backgroundColor: colors.primary,
+    shadowColor: colors.shadow,
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 1,
+    shadowRadius: 18,
+    elevation: 2
+  },
+  primaryPressed: {
+    backgroundColor: colors.primaryPressed,
+    transform: [{ scale: 0.99 }]
   },
   ghostButton: {
     backgroundColor: colors.surface,
     borderWidth: 1,
-    borderColor: colors.border
+    borderColor: colors.borderStrong
+  },
+  ghostPressed: {
+    backgroundColor: colors.surfaceAlt,
+    transform: [{ scale: 0.99 }]
   },
   disabledButton: {
     opacity: 0.55
   },
-  pressedButton: {
-    transform: [{ scale: 0.99 }]
-  },
   text: {
     fontSize: 16,
-    fontWeight: "700"
+    fontWeight: "800"
   },
   primaryText: {
     color: "#FFFFFF"

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, Text, TextInput, View } from "react-native";
 import { colors, radius, spacing } from "../constants/theme";
 
@@ -8,8 +8,11 @@ export default function TextAreaField({
   onChangeText,
   placeholder,
   error,
+  hint,
   minHeight = 120
 }) {
+  const [isFocused, setIsFocused] = useState(false);
+
   return (
     <View>
       {label ? <Text style={styles.label}>{label}</Text> : null}
@@ -19,12 +22,25 @@ export default function TextAreaField({
         value={value}
         onChangeText={onChangeText}
         placeholder={placeholder}
-        placeholderTextColor={colors.textMuted}
-        style={[styles.input, { minHeight }, error ? styles.inputError : null]}
+        placeholderTextColor={colors.textSoft}
+        style={[
+          styles.input,
+          { minHeight },
+          isFocused && styles.inputFocused,
+          error ? styles.inputError : null
+        ]}
         textAlignVertical="top"
+        onFocus={() => setIsFocused(true)}
+        onBlur={() => setIsFocused(false)}
       />
 
-      {error ? <Text style={styles.errorText}>{error}</Text> : null}
+      {error ? (
+        <View style={styles.feedbackRow}>
+          <Text style={styles.errorText}>{error}</Text>
+        </View>
+      ) : hint ? (
+        <Text style={styles.hintText}>{hint}</Text>
+      ) : null}
     </View>
   );
 }
@@ -44,14 +60,30 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacing.md,
     paddingVertical: spacing.md,
     fontSize: 16,
+    lineHeight: 23,
     color: colors.text
   },
+  inputFocused: {
+    borderColor: colors.primary,
+    backgroundColor: "#FBFDFF"
+  },
   inputError: {
-    borderColor: colors.danger
+    borderColor: colors.danger,
+    backgroundColor: colors.dangerSoft
+  },
+  feedbackRow: {
+    marginTop: spacing.xs
   },
   errorText: {
-    marginTop: spacing.xs,
     color: colors.danger,
-    fontSize: 13
+    fontSize: 13,
+    lineHeight: 18,
+    fontWeight: "600"
+  },
+  hintText: {
+    marginTop: spacing.xs,
+    color: colors.textSoft,
+    fontSize: 13,
+    lineHeight: 18
   }
 });

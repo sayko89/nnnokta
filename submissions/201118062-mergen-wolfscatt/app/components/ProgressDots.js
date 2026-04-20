@@ -6,9 +6,15 @@ export default function ProgressDots({ total, currentIndex }) {
   return (
     <View style={styles.row}>
       {Array.from({ length: total }).map((_, index) => {
-        const active = index <= currentIndex;
+        const active = index === currentIndex;
+        const completed = index < currentIndex;
 
-        return <View key={index} style={[styles.dot, active && styles.activeDot]} />;
+        return (
+          <View
+            key={index}
+            style={[styles.dot, completed && styles.completedDot, active && styles.activeDot]}
+          />
+        );
       })}
     </View>
   );
@@ -25,8 +31,11 @@ const styles = StyleSheet.create({
     borderRadius: 999,
     backgroundColor: colors.border
   },
+  completedDot: {
+    backgroundColor: colors.primarySoft
+  },
   activeDot: {
-    width: 26,
+    width: 28,
     backgroundColor: colors.primary
   }
 });

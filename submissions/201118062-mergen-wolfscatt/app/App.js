@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { SafeAreaView, StyleSheet } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import HomeScreen from "./screens/HomeScreen";
@@ -13,32 +13,80 @@ export default function App() {
   const [screen, setScreen] = useState("home");
   const [idea, setIdea] = useState("");
   const [answers, setAnswers] = useState(INITIAL_ANSWERS);
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [spec, setSpec] = useState(null);
+  const generationTimeoutRef = useRef(null);
 
   const questions = useMemo(() => FOLLOW_UP_QUESTIONS, []);
 
+  const clearGenerationTimeout = () => {
+    if (generationTimeoutRef.current) {
+      clearTimeout(generationTimeoutRef.current);
+      generationTimeoutRef.current = null;
+    }
+  };
+
+  useEffect(() => {
+    return () => {
+      clearGenerationTimeout();
+    };
+  }, []);
+
   const handleStart = (rawIdea) => {
+    clearGenerationTimeout();
     setIdea(rawIdea.trim());
     setAnswers(INITIAL_ANSWERS);
+    setCurrentQuestionIndex(0);
     setSpec(null);
     setScreen("questions");
   };
 
-  const handleFinishQuestions = (nextAnswers) => {
-    setAnswers(nextAnswers);
-    setScreen("loading");
+  const handleAnswerChange = (questionId, value) => {
+    setAnswers((prev) => ({
+      ...prev,
+      [questionId]: value
+    }));
+  };
 
-    setTimeout(() => {
-      setSpec(generateSpec(idea, nextAnswers));
-      setScreen("result");
-    }, 1100);
+  const handleQuestionsBack = () => {
+    if (currentQuestionIndex === 0) {
+      setScreen("home");
+      return;
+    }
+
+    setCurrentQuestionIndex((prev) => prev - 1);
+  };
+
+  const handleQuestionsNext = () => {
+    if (currentQuestionIndex === questions.length - 1) {
+      clearGenerationTimeout();
+      setScreen("loading");
+
+      generationTimeoutRef.current = setTimeout(() => {
+        setSpec(generateSpec(idea, answers));
+        setScreen("result");
+        generationTimeoutRef.current = null;
+      }, 1200);
+
+      return;
+    }
+
+    setCurrentQuestionIndex((prev) => prev + 1);
   };
 
   const handleRestart = () => {
+    clearGenerationTimeout();
     setIdea("");
     setAnswers(INITIAL_ANSWERS);
+    setCurrentQuestionIndex(0);
     setSpec(null);
     setScreen("home");
+  };
+
+  const handleEditAnswers = () => {
+    clearGenerationTimeout();
+    setSpec(null);
+    setScreen("questions");
   };
 
   return (
@@ -51,21 +99,18 @@ export default function App() {
         <QuestionsScreen
           idea={idea}
           questions={questions}
-          initialAnswers={answers}
-          onBack={handleRestart}
-          onComplete={handleFinishQuestions}
+          answers={answers}
+          currentIndex={currentQuestionIndex}
+          onAnswerChange={handleAnswerChange}
+          onBack={handleQuestionsBack}
+          onNext={handleQuestionsNext}
         />
       )}
 
       {screen === "loading" && <LoadingScreen idea={idea} />}
 
       {screen === "result" && (
-        <ResultScreen
-          idea={idea}
-          spec={spec}
-          onRestart={handleRestart}
-          onBackToQuestions={() => setScreen("questions")}
-        />
+        <ResultScreen spec={spec} onRestart={handleRestart} onBackToQuestions={handleEditAnswers} />
       )}
     </SafeAreaView>
   );

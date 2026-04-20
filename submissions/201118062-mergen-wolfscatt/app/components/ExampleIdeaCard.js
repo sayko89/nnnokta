@@ -15,7 +15,7 @@ export default function ExampleIdeaCard({ title, description, exampleText, onPre
       <Text style={styles.title}>{title}</Text>
       <Text style={styles.description}>{description}</Text>
       <Text style={styles.exampleText}>{exampleText}</Text>
-      <Text style={styles.hint}>Dokununca giriş alanını doldurur</Text>
+      <Text style={styles.hint}>Dokununca metni otomatik olarak doldurur</Text>
     </Pressable>
   );
 }
@@ -25,12 +25,13 @@ const styles = StyleSheet.create({
     marginTop: spacing.md,
     padding: spacing.md,
     borderRadius: radius.md,
-    backgroundColor: colors.surfaceAlt,
+    backgroundColor: colors.surfaceStrong,
     borderWidth: 1,
     borderColor: colors.primarySoft
   },
   cardPressed: {
-    opacity: 0.9
+    opacity: 0.92,
+    transform: [{ scale: 0.995 }]
   },
   badge: {
     alignSelf: "flex-start",
@@ -42,12 +43,12 @@ const styles = StyleSheet.create({
   },
   badgeText: {
     fontSize: 12,
-    fontWeight: "700",
+    fontWeight: "800",
     color: colors.primary
   },
   title: {
     fontSize: 15,
-    fontWeight: "700",
+    fontWeight: "800",
     color: colors.text,
     marginBottom: 6
   },
@@ -65,7 +66,7 @@ const styles = StyleSheet.create({
   hint: {
     marginTop: spacing.sm,
     fontSize: 12,
-    fontWeight: "600",
+    fontWeight: "700",
     color: colors.primary
   }
 });

@@ -31,9 +31,10 @@ export default function ResultScreen({ spec, onRestart, onBackToQuestions }) {
     return (
       <View style={styles.emptyContainer}>
         <SectionCard>
-          <Text style={styles.emptyTitle}>Henüz sonuç oluşturulmadı</Text>
+          <Text style={styles.emptyTitle}>Henüz sonuç oluşmadı</Text>
           <Text style={styles.emptyText}>
-            Önce fikir girişini ve 4 soruluk akışı tamamladığında burada ürün özeti görünecek.
+            Önce fikir girişini ve soru akışının tamamını bitirdiğinde burada bir ürün özeti
+            göreceksin.
           </Text>
           <PrimaryButton title="Başa Dön" onPress={onRestart} />
         </SectionCard>
@@ -47,7 +48,7 @@ export default function ResultScreen({ spec, onRestart, onBackToQuestions }) {
         <Text style={styles.caption}>Nokta Capture sonucu</Text>
         <Text style={styles.title}>Tek sayfalık ürün özeti</Text>
         <Text style={styles.subtitle}>
-          Fikir ve verdiğin cevaplar birleştirilerek okunabilir bir başlangıç spec'i oluşturuldu.
+          Fikir ve cevaplarından üretilen bu özet, MVP kapsamını daha net görmen için hazırlandı.
         </Text>
       </View>
 
@@ -93,7 +94,8 @@ export default function ResultScreen({ spec, onRestart, onBackToQuestions }) {
 const styles = StyleSheet.create({
   content: {
     padding: spacing.lg,
-    gap: spacing.lg
+    gap: spacing.lg,
+    paddingBottom: spacing.xxl
   },
   header: {
     paddingTop: spacing.sm,
@@ -101,7 +103,7 @@ const styles = StyleSheet.create({
   },
   caption: {
     fontSize: 13,
-    fontWeight: "700",
+    fontWeight: "800",
     color: colors.primary
   },
   title: {
@@ -116,14 +118,14 @@ const styles = StyleSheet.create({
     color: colors.textMuted
   },
   highlightCard: {
-    backgroundColor: "#F9FBFF"
+    backgroundColor: colors.surfaceStrong
   },
   highlightLabel: {
     alignSelf: "flex-start",
     backgroundColor: colors.primarySoft,
     color: colors.primary,
     fontSize: 12,
-    fontWeight: "700",
+    fontWeight: "800",
     paddingHorizontal: 10,
     paddingVertical: 6,
     borderRadius: 999,
@@ -139,7 +141,7 @@ const styles = StyleSheet.create({
   },
   sectionTitle: {
     fontSize: 14,
-    fontWeight: "700",
+    fontWeight: "800",
     color: colors.text,
     marginBottom: spacing.xs
   },
@@ -170,8 +172,7 @@ const styles = StyleSheet.create({
     color: colors.textMuted
   },
   buttonGroup: {
-    gap: spacing.sm,
-    paddingBottom: spacing.md
+    gap: spacing.sm
   },
   emptyContainer: {
     flex: 1,

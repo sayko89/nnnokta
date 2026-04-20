@@ -34,6 +34,11 @@ export default function HomeScreen({ initialIdea, onStart }) {
       return;
     }
 
+    if (trimmed.length < 10) {
+      setError("Fikri biraz daha aç. Bir iki kelimeden fazlası yeterli.");
+      return;
+    }
+
     setError("");
     onStart(trimmed);
   };
@@ -45,11 +50,11 @@ export default function HomeScreen({ initialIdea, onStart }) {
     >
       <ScrollView contentContainerStyle={styles.content} keyboardShouldPersistTaps="handled">
         <View style={styles.hero}>
-          <Text style={styles.eyebrow}>Track A</Text>
+          <Text style={styles.eyebrow}>Track A teslimi</Text>
           <Text style={styles.title}>Nokta Capture</Text>
           <Text style={styles.subtitle}>
-            Ham ürün fikrini birkaç cümleyle yaz. Sonraki adımda uygulama sana kısa takip
-            soruları sorarak fikri daha net bir ürün özetine dönüştürecek.
+            Ham ürün fikrini kısa bir metin olarak yaz. Uygulama sonraki adımda 4 takip sorusu
+            sorarak bunu daha okunabilir bir ürün özetine dönüştürecek.
           </Text>
         </View>
 
@@ -60,12 +65,13 @@ export default function HomeScreen({ initialIdea, onStart }) {
             onChangeText={handleIdeaChange}
             placeholder="Örnek: öğrenciler için ortak ders çalışma planlama uygulaması"
             error={error}
+            hint="Ne kadar net yazarsan, çıktı o kadar kullanışlı olur."
             minHeight={150}
           />
 
           <ExampleIdeaCard
-            title="Hızlı başlamak istersen"
-            description="Örnek bir fikir metniyle giriş alanını otomatik doldurabilirsin."
+            title="Hızlı başlangıç"
+            description="Örnek bir fikirle akışı hemen deneyebilirsin."
             exampleText={EXAMPLE_IDEA}
             onPress={handleUseExample}
           />
@@ -73,8 +79,8 @@ export default function HomeScreen({ initialIdea, onStart }) {
           <View style={styles.infoBox}>
             <Text style={styles.infoTitle}>Bu adımda ne oluyor?</Text>
             <Text style={styles.infoText}>
-              Önce ham fikir alınır. Devam ettiğinde uygulama problem, kullanıcı, kapsam ve
-              kısıt tarafını netleştirmek için 4 kısa soru sorar.
+              Önce fikir yakalanıyor. Devam ettiğinde uygulama problem, kullanıcı, kapsam ve risk
+              başlıklarında 4 kısa soru soruyor.
             </Text>
           </View>
 
@@ -82,10 +88,10 @@ export default function HomeScreen({ initialIdea, onStart }) {
         </SectionCard>
 
         <SectionCard style={styles.noteCard}>
-          <Text style={styles.noteTitle}>Odaklı başlangıç</Text>
+          <Text style={styles.noteTitle}>Küçük ama net bir prototip</Text>
           <Text style={styles.noteText}>
-            Bu ekran özellikle ilk adımı hızlı ve anlaşılır tutmak için tasarlandı. Amaç uzun form
-            doldurtmak değil, fikir girişindeki sürtünmeyi azaltmak.
+            Bu uygulama Nokta vizyonunun tamamını değil, challenge için en gösterilebilir dilimini
+            odağa alıyor: fikir girişi, soru akışı ve tek sayfalık özet.
           </Text>
         </SectionCard>
       </ScrollView>
@@ -99,37 +105,44 @@ const styles = StyleSheet.create({
   },
   content: {
     padding: spacing.lg,
-    gap: spacing.lg
+    gap: spacing.lg,
+    paddingBottom: spacing.xxl
   },
   hero: {
     paddingTop: spacing.md,
-    gap: spacing.xs
+    gap: spacing.sm
   },
   eyebrow: {
-    fontSize: 13,
-    fontWeight: "700",
-    color: colors.primary
+    alignSelf: "flex-start",
+    fontSize: 12,
+    fontWeight: "800",
+    color: colors.primary,
+    backgroundColor: colors.primarySoft,
+    paddingHorizontal: 10,
+    paddingVertical: 6,
+    borderRadius: 999
   },
   title: {
-    fontSize: 32,
+    fontSize: 34,
+    lineHeight: 40,
     fontWeight: "800",
     color: colors.text
   },
   subtitle: {
     fontSize: 16,
-    lineHeight: 24,
+    lineHeight: 25,
     color: colors.textMuted
   },
   infoBox: {
     marginTop: spacing.md,
     marginBottom: spacing.lg,
-    backgroundColor: colors.surfaceAlt,
+    backgroundColor: colors.surfaceStrong,
     borderRadius: 14,
     padding: spacing.md
   },
   infoTitle: {
     fontSize: 14,
-    fontWeight: "700",
+    fontWeight: "800",
     color: colors.text,
     marginBottom: 6
   },
@@ -139,17 +152,17 @@ const styles = StyleSheet.create({
     color: colors.textMuted
   },
   noteCard: {
-    backgroundColor: "#F9FBFF"
+    backgroundColor: colors.surfaceAlt
   },
   noteTitle: {
     fontSize: 16,
-    fontWeight: "700",
+    fontWeight: "800",
     color: colors.text,
     marginBottom: 6
   },
   noteText: {
     fontSize: 14,
-    lineHeight: 21,
+    lineHeight: 22,
     color: colors.textMuted
   }
 });

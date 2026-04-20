@@ -118,14 +118,6 @@ export default function HomeScreen({ initialIdea, onStart }) {
           <PrimaryButton title="Devam Et" onPress={handleContinue} />
         </View>
       </SectionCard>
-
-      <SectionCard tone="muted" style={styles.footerNote}>
-        <Text style={styles.noteTitle}>Odaklı bir başlangıç ekranı</Text>
-        <Text style={styles.noteText}>
-          Bu prototip tam platformu göstermeyi değil, kullanıcıya güven veren temiz bir ilk adım
-          deneyimi sunmayı hedefliyor.
-        </Text>
-      </SectionCard>
     </ScreenContainer>
   );
 }

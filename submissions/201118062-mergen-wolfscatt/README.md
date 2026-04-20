@@ -72,15 +72,15 @@ Not: Challenge kuralına uygun şekilde root klasör değiştirilmemiştir. Tüm
 
 ## Expo Linki
 
-`[Expo linki buraya eklenecek]`
+[Expo linki](https://expo.dev/accounts/velmora/projects/nokta-capture/builds/897a568c-aa77-4a96-ab52-cd1eb3308a60)
 
 ## Demo Video
 
-`[60 saniyelik demo video linki buraya eklenecek]`
+[Video](https://youtube.com/shorts/VzqHTmlCTUc?feature=share)
 
 ## APK
 
-`[APK dosya yolu veya paylaşım linki buraya eklenecek]`
+`[APK dosya yolu ]`
 
 ## Decision Log
 
@@ -95,4 +95,3 @@ Not: Challenge kuralına uygun şekilde root klasör değiştirilmemiştir. Tüm
 ## Kullanılan AI Araçları
 
 - ChatGPT / Codex: içerik netleştirme, akış tasarımı, metin yazımı ve uygulama geliştirme desteği
-- Gerekirse ek AI araçları README decision log içinde ayrıca belirtilebilir

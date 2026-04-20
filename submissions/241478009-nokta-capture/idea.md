@@ -1,15 +1,11 @@
-# Nokta Capture — Track A: Engineering-Guided Specification
+# Nokta Forge — Track A: The Anti-Slop Crucible
 
-Bu belge, Nokta projesinin **Track A (Dot Capture & Enrich)** dilimine ait özelleştirilmiş anayasasıdır ve slop-free üretim felsefesine sıkı sıkıya bağlıdır.
+Nokta Forge, ham fikirlerin (noktaların) konfor alanından çıkarılıp mühendislik kısıtlarıyla yüzleştirildiği adaptif bir kuluçka modülüdür. 
 
 ## 1. Thesis (Tez)
-Bir fikrin değerli olabilmesi için pazarlama süslemelerinden arınmış, "ne olduğu" kadar "ne gibi kısıtlamalara tabi olduğu" da netleştirilmiş bir sistem mimarisine (artifact) dönüşmesi gerekir. Nokta Capture, kullanıcının ham fikrini alır, acımasız bir sistem mühendisi gibi sorgular ve teknik bir spesifikasyon tablosu üretir.
+Standart LLM arayüzleri, kullanıcıyı onaylamak ve jenerik metinler (slop) üretmek üzere eğitilmiştir. Nokta Forge ise "Red-Teaming" mantığıyla çalışır. Kullanıcının fikrini onaylamak yerine, o fikrin en zayıf donanımsal veya yazılımsal halkasına saldırır. Fikir ancak bu teknik sorgudan (Interrogation) sağ çıkarsa bir "Artifact" (Spesifikasyon) halini alır.
 
-## 2. Core Mechanism (Nasıl Çalışır?)
-Uygulama, jenerik (slop) LLM çıktılarını reddeder. Bunun yerine şu akışı izler:
-1. **Raw Input:** Kullanıcı dağınık fikrini veya not dökümünü girer.
-2. **Engineering Interrogation (Sorgu):** AI, fikrin sınırlarını zorlayan 3 adet teknik kısıt sorusu sorar (Örn: Edge vs Cloud compute load, Offline fallback senaryosu, Hardware bottleneck).
-3. **Artifact Generation:** Soruların yanıtlanmasıyla sistem, slop skorunu hesaplar ve net bir "Requirement Specification" (Gereksinim Belgesi) üretir.
-
-## 3. Anti-Slop Constraint
-Oluşturulan nihai belge, uzun paragraflardan oluşamaz. Sistemin darboğazlarını ve ana akışını gösteren bir yapı (JSON veya katı yapılandırılmış Markdown) olmak zorundadır.
+## 2. A2UI & Recursive Interrogation (Nasıl Çalışır?)
+1. **Dynamic Context:** Fikir girildiğinde sistem alan taraması yapar (Örn: Aviyonik, Mobil, Tarım). Arayüz (A2UI) bu domaine göre renk ve terminoloji değiştirir.
+2. **Slop Meter (Çöp-Fikir Radarı):** Kullanıcının cevaplarındaki teknik terim yoğunluğu (entropy) ölçülür. Yüzeysel cevaplar reddedilir ve kullanıcı daha spesifik kısıtlar (Scope/Constraint) vermeye zorlanır.
+3. **The Blueprint:** 3-5 turluk iterasyonun sonunda, yatırımcıya veya mühendise doğrudan verilebilecek, "Complexity Score" (Zorluk Derecesi) hesaplanmış tek sayfalık bir "Technical Spec Card" üretilir.

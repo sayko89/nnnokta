@@ -28,10 +28,12 @@ export default function ScreenContainer({
       contentInsetAdjustmentBehavior="always"
       showsVerticalScrollIndicator={false}
     >
+      <View style={styles.glowTop} />
       {children}
     </ScrollView>
   ) : (
     <View style={[styles.staticContent, centered && styles.centeredContent, contentContainerStyle]}>
+      <View style={styles.glowTop} />
       {children}
     </View>
   );
@@ -63,7 +65,8 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     paddingHorizontal: spacing.lg,
     paddingTop: spacing.md,
-    paddingBottom: spacing.xxl
+    paddingBottom: spacing.xxl,
+    gap: spacing.lg
   },
   staticContent: {
     flex: 1,
@@ -73,5 +76,15 @@ const styles = StyleSheet.create({
   },
   centeredContent: {
     justifyContent: "center"
+  },
+  glowTop: {
+    position: "absolute",
+    top: -96,
+    right: -24,
+    width: 220,
+    height: 220,
+    borderRadius: 999,
+    backgroundColor: colors.backgroundGlow,
+    opacity: 0.9
   }
 });

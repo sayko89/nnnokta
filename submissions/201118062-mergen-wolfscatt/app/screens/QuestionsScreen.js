@@ -3,9 +3,11 @@ import { StyleSheet, Text, View } from "react-native";
 import PrimaryButton from "../components/PrimaryButton";
 import ProgressDots from "../components/ProgressDots";
 import ScreenContainer from "../components/ScreenContainer";
+import SecondaryButton from "../components/SecondaryButton";
 import SectionCard from "../components/SectionCard";
+import SectionTitle from "../components/SectionTitle";
 import TextAreaField from "../components/TextAreaField";
-import { colors, spacing } from "../constants/theme";
+import { colors, spacing, typography } from "../constants/theme";
 
 export default function QuestionsScreen({
   idea,
@@ -56,101 +58,71 @@ export default function QuestionsScreen({
     onNext();
   };
 
-  const handlePrevious = () => {
-    setError("");
-    onBack();
-  };
-
   return (
     <ScreenContainer scroll contentContainerStyle={styles.content}>
-        <View style={styles.header}>
-          <Text style={styles.caption}>Takip soruları</Text>
-          <Text style={styles.ideaText}>{idea}</Text>
-          <Text style={styles.headerText}>Kısa cevaplar yeterli. Amaç fikri netleştirmek.</Text>
+      <View style={styles.header}>
+        <SectionTitle
+          eyebrow={`Takip soruları • ${progressText}`}
+          title={idea}
+          description="Kısa cevaplar yeterli. Amaç fikri netleştirmek."
+        />
+      </View>
+
+      <SectionCard style={styles.questionCard}>
+        <View style={styles.topRow}>
+          <ProgressDots total={questions.length} currentIndex={currentIndex} />
+          <Text style={styles.progressText}>{progressText}</Text>
         </View>
 
-        <SectionCard>
-          <View style={styles.topRow}>
-            <ProgressDots total={questions.length} currentIndex={currentIndex} />
-            <Text style={styles.progressText}>{progressText}</Text>
+        <SectionTitle title={currentQuestion.title} description={helperText} />
+
+        <TextAreaField
+          value={currentValue}
+          onChangeText={handleAnswerChange}
+          placeholder={currentQuestion.placeholder}
+          error={error}
+          minHeight={156}
+        />
+
+        <View style={styles.buttonRow}>
+          <View style={styles.buttonItem}>
+            <SecondaryButton title={currentIndex === 0 ? "Fikre Dön" : "Geri"} onPress={onBack} />
           </View>
 
-          <Text style={styles.questionTitle}>{currentQuestion.title}</Text>
-
-          <TextAreaField
-            value={currentValue}
-            onChangeText={handleAnswerChange}
-            placeholder={currentQuestion.placeholder}
-            error={error}
-            hint={helperText}
-            minHeight={150}
-          />
-
-          <View style={styles.buttonRow}>
-            <View style={styles.buttonItem}>
-              <PrimaryButton
-                title={currentIndex === 0 ? "Fikre Dön" : "Geri"}
-                variant="ghost"
-                onPress={handlePrevious}
-              />
-            </View>
-
-            <View style={styles.buttonItem}>
-              <PrimaryButton
-                title={isLastQuestion ? "Özeti Oluştur" : "İleri"}
-                onPress={handleNext}
-              />
-            </View>
+          <View style={styles.buttonItem}>
+            <PrimaryButton
+              title={isLastQuestion ? "Özeti Oluştur" : "İleri"}
+              onPress={handleNext}
+            />
           </View>
-        </SectionCard>
+        </View>
+      </SectionCard>
     </ScreenContainer>
   );
 }
 
 const styles = StyleSheet.create({
   content: {
-    gap: spacing.lg,
+    gap: spacing.xl,
     justifyContent: "space-between"
   },
   header: {
-    gap: spacing.xs
+    gap: spacing.sm
   },
-  caption: {
-    fontSize: 13,
-    fontWeight: "800",
-    color: colors.primary
-  },
-  ideaText: {
-    fontSize: 24,
-    lineHeight: 32,
-    fontWeight: "800",
-    color: colors.text
-  },
-  headerText: {
-    fontSize: 14,
-    lineHeight: 21,
-    color: colors.textMuted
+  questionCard: {
+    gap: spacing.lg
   },
   topRow: {
     flexDirection: "row",
     justifyContent: "space-between",
-    alignItems: "center",
-    marginBottom: spacing.lg
+    alignItems: "center"
   },
   progressText: {
-    fontSize: 14,
-    fontWeight: "800",
+    ...typography.label,
     color: colors.textMuted
   },
-  questionTitle: {
-    fontSize: 24,
-    lineHeight: 32,
-    fontWeight: "800",
-    color: colors.text,
-    marginBottom: spacing.md
-  },
   buttonRow: {
-    marginTop: spacing.lg,
+    marginTop: spacing.xs,
     flexDirection: "row",
     gap: spacing.sm
   },

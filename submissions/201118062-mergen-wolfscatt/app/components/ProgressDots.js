@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
-import { colors, spacing } from "../constants/theme";
+import { colors, radius, spacing } from "../constants/theme";
 
 export default function ProgressDots({ total, currentIndex }) {
   return (
@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
   dot: {
     width: 10,
     height: 10,
-    borderRadius: 999,
+    borderRadius: radius.pill,
     backgroundColor: colors.border
   },
   completedDot: {

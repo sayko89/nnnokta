@@ -4,8 +4,9 @@ import ExampleIdeaCard from "../components/ExampleIdeaCard";
 import PrimaryButton from "../components/PrimaryButton";
 import ScreenContainer from "../components/ScreenContainer";
 import SectionCard from "../components/SectionCard";
+import SectionTitle from "../components/SectionTitle";
 import TextAreaField from "../components/TextAreaField";
-import { colors, spacing } from "../constants/theme";
+import { colors, radius, spacing, typography } from "../constants/theme";
 
 const EXAMPLE_IDEA =
   "Kampüste öğrencilerin boş sınıf bulmasını kolaylaştıran ve uygun saatleri gösteren mobil uygulama";
@@ -46,113 +47,108 @@ export default function HomeScreen({ initialIdea, onStart }) {
 
   return (
     <ScreenContainer scroll contentContainerStyle={styles.content}>
-        <View style={styles.hero}>
-          <Text style={styles.eyebrow}>Track A teslimi</Text>
-          <Text style={styles.title}>Nokta Capture</Text>
-          <Text style={styles.subtitle}>
-            Ham ürün fikrini kısa bir metin olarak yaz. Uygulama sonraki adımda 4 takip sorusu
-            sorarak bunu daha okunabilir bir ürün özetine dönüştürecek.
+      <View style={styles.hero}>
+        <View style={styles.badge}>
+          <Text style={styles.badgeText}>Track A teslimi</Text>
+        </View>
+
+        <SectionTitle
+          title="Nokta Capture"
+          description="Ham ürün fikrini kısa bir metin olarak yaz. Uygulama sonraki adımda 4 takip sorusu sorarak bunu daha okunabilir bir ürün özetine dönüştürecek."
+        />
+      </View>
+
+      <SectionCard style={styles.mainCard}>
+        <SectionTitle
+          eyebrow="Adım 1"
+          title="Ham fikri yakala"
+          description="Net bir başlangıç yazman, sonraki soruları ve özeti daha güçlü hale getirir."
+        />
+
+        <TextAreaField
+          label="Ham fikir"
+          value={idea}
+          onChangeText={handleIdeaChange}
+          placeholder="Örnek: öğrenciler için ortak ders çalışma planlama uygulaması"
+          error={error}
+          hint="Ne kadar net yazarsan, çıktı o kadar kullanışlı olur."
+          minHeight={150}
+        />
+
+        <ExampleIdeaCard
+          title="Hızlı başlangıç"
+          description="Örnek bir fikirle akışı hemen deneyebilirsin."
+          exampleText={EXAMPLE_IDEA}
+          onPress={handleUseExample}
+        />
+
+        <View style={styles.infoBox}>
+          <Text style={styles.infoTitle}>Bu adımda ne oluyor?</Text>
+          <Text style={styles.infoText}>
+            Önce fikir yakalanıyor. Devam ettiğinde uygulama problem, kullanıcı, kapsam ve risk
+            başlıklarında 4 kısa soru soruyor.
           </Text>
         </View>
 
-        <SectionCard>
-          <TextAreaField
-            label="Ham fikir"
-            value={idea}
-            onChangeText={handleIdeaChange}
-            placeholder="Örnek: öğrenciler için ortak ders çalışma planlama uygulaması"
-            error={error}
-            hint="Ne kadar net yazarsan, çıktı o kadar kullanışlı olur."
-            minHeight={150}
-          />
+        <PrimaryButton title="Devam Et" onPress={handleContinue} />
+      </SectionCard>
 
-          <ExampleIdeaCard
-            title="Hızlı başlangıç"
-            description="Örnek bir fikirle akışı hemen deneyebilirsin."
-            exampleText={EXAMPLE_IDEA}
-            onPress={handleUseExample}
-          />
-
-          <View style={styles.infoBox}>
-            <Text style={styles.infoTitle}>Bu adımda ne oluyor?</Text>
-            <Text style={styles.infoText}>
-              Önce fikir yakalanıyor. Devam ettiğinde uygulama problem, kullanıcı, kapsam ve risk
-              başlıklarında 4 kısa soru soruyor.
-            </Text>
-          </View>
-
-          <PrimaryButton title="Devam Et" onPress={handleContinue} />
-        </SectionCard>
-
-        <SectionCard style={styles.noteCard}>
-          <Text style={styles.noteTitle}>Küçük ama net bir prototip</Text>
-          <Text style={styles.noteText}>
-            Bu uygulama Nokta vizyonunun tamamını değil, challenge için en gösterilebilir dilimini
-            odağa alıyor: fikir girişi, soru akışı ve tek sayfalık özet.
-          </Text>
-        </SectionCard>
+      <SectionCard tone="muted">
+        <Text style={styles.noteTitle}>Küçük ama net bir prototip</Text>
+        <Text style={styles.noteText}>
+          Bu uygulama Nokta vizyonunun tamamını değil, challenge için en gösterilebilir dilimini
+          odağa alıyor: fikir girişi, soru akışı ve tek sayfalık özet.
+        </Text>
+      </SectionCard>
     </ScreenContainer>
   );
 }
 
 const styles = StyleSheet.create({
   content: {
-    gap: spacing.lg
+    gap: spacing.xl
   },
   hero: {
-    gap: spacing.sm
+    gap: spacing.md,
+    paddingTop: spacing.xs
   },
-  eyebrow: {
+  badge: {
     alignSelf: "flex-start",
-    fontSize: 12,
-    fontWeight: "800",
-    color: colors.primary,
-    backgroundColor: colors.primarySoft,
-    paddingHorizontal: 10,
-    paddingVertical: 6,
-    borderRadius: 999
+    paddingHorizontal: spacing.sm,
+    paddingVertical: spacing.xs,
+    borderRadius: radius.pill,
+    backgroundColor: colors.primarySoft
   },
-  title: {
-    fontSize: 34,
-    lineHeight: 40,
-    fontWeight: "800",
-    color: colors.text
+  badgeText: {
+    ...typography.caption,
+    color: colors.primary
   },
-  subtitle: {
-    fontSize: 16,
-    lineHeight: 25,
-    color: colors.textMuted
+  mainCard: {
+    gap: spacing.lg
   },
   infoBox: {
-    marginTop: spacing.md,
-    marginBottom: spacing.lg,
-    backgroundColor: colors.surfaceStrong,
-    borderRadius: 14,
-    padding: spacing.md
+    backgroundColor: colors.surfaceTint,
+    borderRadius: radius.md,
+    padding: spacing.md,
+    borderWidth: 1,
+    borderColor: colors.primarySoft
   },
   infoTitle: {
-    fontSize: 14,
-    fontWeight: "800",
+    ...typography.label,
     color: colors.text,
-    marginBottom: 6
+    marginBottom: spacing.xs
   },
   infoText: {
-    fontSize: 14,
-    lineHeight: 21,
+    ...typography.bodySm,
     color: colors.textMuted
   },
-  noteCard: {
-    backgroundColor: colors.surfaceAlt
-  },
   noteTitle: {
-    fontSize: 16,
-    fontWeight: "800",
+    ...typography.titleSm,
     color: colors.text,
-    marginBottom: 6
+    marginBottom: spacing.xs
   },
   noteText: {
-    fontSize: 14,
-    lineHeight: 22,
+    ...typography.bodySm,
     color: colors.textMuted
   }
 });

@@ -2,7 +2,8 @@ import React from "react";
 import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
 import ScreenContainer from "../components/ScreenContainer";
 import SectionCard from "../components/SectionCard";
-import { colors, spacing } from "../constants/theme";
+import SectionTitle from "../components/SectionTitle";
+import { colors, radius, spacing, typography } from "../constants/theme";
 
 function SkeletonLine({ width }) {
   return <View style={[styles.skeletonLine, { width }]} />;
@@ -16,11 +17,12 @@ export default function LoadingScreen({ idea }) {
           <ActivityIndicator size="large" color={colors.primary} />
         </View>
 
-        <Text style={styles.title}>Özet hazırlanıyor</Text>
-        <Text style={styles.text}>
-          "{idea}" fikri için cevaplar birleştiriliyor. Birkaç saniye içinde tek sayfalık sonuç
-          ekrana gelecek.
-        </Text>
+        <SectionTitle
+          align="center"
+          eyebrow="Yapay zeka özeti hazırlanıyor"
+          title="Özet hazırlanıyor"
+          description={`"${idea}" fikri için cevaplar birleştiriliyor. Birkaç saniye içinde tek sayfalık sonuç ekrana gelecek.`}
+        />
 
         <View style={styles.preview}>
           <Text style={styles.previewLabel}>Hazırlanan bölümler</Text>
@@ -40,46 +42,31 @@ const styles = StyleSheet.create({
   },
   card: {
     alignItems: "center",
-    gap: spacing.md,
+    gap: spacing.lg,
     paddingVertical: spacing.xxl
   },
   iconWrap: {
-    width: 72,
-    height: 72,
-    borderRadius: 999,
+    width: 76,
+    height: 76,
+    borderRadius: radius.pill,
     backgroundColor: colors.primarySoft,
     alignItems: "center",
     justifyContent: "center"
   },
-  title: {
-    fontSize: 24,
-    fontWeight: "800",
-    color: colors.text
-  },
-  text: {
-    textAlign: "center",
-    fontSize: 15,
-    lineHeight: 23,
-    color: colors.textMuted,
-    maxWidth: 320
-  },
   preview: {
     width: "100%",
-    marginTop: spacing.sm,
-    backgroundColor: colors.surfaceAlt,
-    borderRadius: 18,
+    backgroundColor: colors.surfaceMuted,
+    borderRadius: radius.md,
     padding: spacing.md,
     gap: spacing.sm
   },
   previewLabel: {
-    fontSize: 13,
-    fontWeight: "800",
-    color: colors.textMuted,
-    marginBottom: 2
+    ...typography.caption,
+    color: colors.textMuted
   },
   skeletonLine: {
     height: 12,
-    borderRadius: 999,
+    borderRadius: radius.pill,
     backgroundColor: colors.primarySoft
   }
 });

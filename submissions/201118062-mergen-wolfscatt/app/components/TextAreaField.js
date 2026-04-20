@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, TextInput, View } from "react-native";
-import { colors, radius, spacing } from "../constants/theme";
+import { colors, radius, spacing, typography } from "../constants/theme";
 
 export default function TextAreaField({
   label,
@@ -35,9 +35,7 @@ export default function TextAreaField({
       />
 
       {error ? (
-        <View style={styles.feedbackRow}>
-          <Text style={styles.errorText}>{error}</Text>
-        </View>
+        <Text style={styles.errorText}>{error}</Text>
       ) : hint ? (
         <Text style={styles.hintText}>{hint}</Text>
       ) : null}
@@ -47,43 +45,37 @@ export default function TextAreaField({
 
 const styles = StyleSheet.create({
   label: {
-    fontSize: 14,
-    fontWeight: "700",
+    ...typography.label,
     color: colors.text,
     marginBottom: spacing.xs
   },
   input: {
-    backgroundColor: colors.surface,
+    backgroundColor: colors.surfaceMuted,
     borderRadius: radius.md,
     borderWidth: 1,
     borderColor: colors.border,
     paddingHorizontal: spacing.md,
     paddingVertical: spacing.md,
-    fontSize: 16,
-    lineHeight: 23,
+    ...typography.bodyMd,
     color: colors.text
   },
   inputFocused: {
     borderColor: colors.primary,
-    backgroundColor: "#FBFDFF"
+    backgroundColor: colors.surface
   },
   inputError: {
     borderColor: colors.danger,
     backgroundColor: colors.dangerSoft
   },
-  feedbackRow: {
-    marginTop: spacing.xs
-  },
   errorText: {
-    color: colors.danger,
-    fontSize: 13,
-    lineHeight: 18,
-    fontWeight: "600"
+    marginTop: spacing.xs,
+    ...typography.caption,
+    color: colors.danger
   },
   hintText: {
     marginTop: spacing.xs,
+    ...typography.caption,
     color: colors.textSoft,
-    fontSize: 13,
-    lineHeight: 18
+    fontWeight: "600"
   }
 });

@@ -1,6 +1,6 @@
 import React from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
-import { colors, radius, spacing } from "../constants/theme";
+import { colors, radius, spacing, typography } from "../constants/theme";
 
 export default function ExampleIdeaCard({ title, description, exampleText, onPress }) {
   return (
@@ -25,48 +25,43 @@ const styles = StyleSheet.create({
     marginTop: spacing.md,
     padding: spacing.md,
     borderRadius: radius.md,
-    backgroundColor: colors.surfaceStrong,
+    backgroundColor: colors.surfaceTint,
     borderWidth: 1,
     borderColor: colors.primarySoft
   },
   cardPressed: {
-    opacity: 0.92,
+    opacity: 0.94,
     transform: [{ scale: 0.995 }]
   },
   badge: {
     alignSelf: "flex-start",
     paddingHorizontal: 10,
     paddingVertical: 6,
-    borderRadius: 999,
-    backgroundColor: colors.primarySoft,
-    marginBottom: spacing.sm
+    borderRadius: radius.pill,
+    backgroundColor: colors.surface
   },
   badgeText: {
-    fontSize: 12,
-    fontWeight: "800",
+    ...typography.caption,
     color: colors.primary
   },
   title: {
-    fontSize: 15,
-    fontWeight: "800",
+    ...typography.titleSm,
     color: colors.text,
-    marginBottom: 6
+    marginTop: spacing.sm,
+    marginBottom: spacing.xs
   },
   description: {
-    fontSize: 14,
-    lineHeight: 21,
+    ...typography.bodySm,
     color: colors.textMuted,
     marginBottom: spacing.sm
   },
   exampleText: {
-    fontSize: 15,
-    lineHeight: 22,
+    ...typography.bodyMd,
     color: colors.text
   },
   hint: {
     marginTop: spacing.sm,
-    fontSize: 12,
-    fontWeight: "700",
+    ...typography.caption,
     color: colors.primary
   }
 });

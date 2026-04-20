@@ -2,8 +2,10 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import PrimaryButton from "../components/PrimaryButton";
 import ScreenContainer from "../components/ScreenContainer";
+import SecondaryButton from "../components/SecondaryButton";
 import SectionCard from "../components/SectionCard";
-import { colors, spacing } from "../constants/theme";
+import SectionTitle from "../components/SectionTitle";
+import { colors, spacing, typography } from "../constants/theme";
 
 function BulletList({ items }) {
   return (
@@ -31,12 +33,12 @@ export default function ResultScreen({ spec, onRestart, onBackToQuestions }) {
   if (!spec) {
     return (
       <ScreenContainer centered contentContainerStyle={styles.emptyContainer}>
-        <SectionCard>
-          <Text style={styles.emptyTitle}>Henüz sonuç oluşmadı</Text>
-          <Text style={styles.emptyText}>
-            Önce fikir girişini ve soru akışının tamamını bitirdiğinde burada bir ürün özeti
-            göreceksin.
-          </Text>
+        <SectionCard style={styles.emptyCard}>
+          <SectionTitle
+            align="center"
+            title="Henüz sonuç oluşmadı"
+            description="Önce fikir girişini ve soru akışının tamamını bitirdiğinde burada bir ürün özeti göreceksin."
+          />
           <PrimaryButton title="Başa Dön" onPress={onRestart} />
         </SectionCard>
       </ScreenContainer>
@@ -45,20 +47,18 @@ export default function ResultScreen({ spec, onRestart, onBackToQuestions }) {
 
   return (
     <ScreenContainer scroll contentContainerStyle={styles.content}>
-      <View style={styles.header}>
-        <Text style={styles.caption}>Nokta Capture sonucu</Text>
-        <Text style={styles.title}>Tek sayfalık ürün özeti</Text>
-        <Text style={styles.subtitle}>
-          Fikir ve cevaplarından üretilen bu özet, MVP kapsamını daha net görmen için hazırlandı.
-        </Text>
-      </View>
+      <SectionTitle
+        eyebrow="Nokta Capture sonucu"
+        title="Tek sayfalık ürün özeti"
+        description="Fikir ve cevaplarından üretilen bu özet, MVP kapsamını daha net görmen için hazırlandı."
+      />
 
-      <SectionCard style={styles.highlightCard}>
+      <SectionCard tone="tint">
         <Text style={styles.highlightLabel}>Hazır özet</Text>
         <Text style={styles.highlightText}>{spec.ideaSummary}</Text>
       </SectionCard>
 
-      <SectionCard>
+      <SectionCard style={styles.resultCard}>
         <SpecSection title="Fikir özeti">
           <Text style={styles.bodyText}>{spec.ideaSummary}</Text>
         </SpecSection>
@@ -86,7 +86,7 @@ export default function ResultScreen({ spec, onRestart, onBackToQuestions }) {
 
       <View style={styles.buttonGroup}>
         <PrimaryButton title="Yeniden Başlat" onPress={onRestart} />
-        <PrimaryButton title="Cevapları Düzenle" variant="ghost" onPress={onBackToQuestions} />
+        <SecondaryButton title="Cevapları Düzenle" onPress={onBackToQuestions} />
       </View>
     </ScreenContainer>
   );
@@ -94,58 +94,30 @@ export default function ResultScreen({ spec, onRestart, onBackToQuestions }) {
 
 const styles = StyleSheet.create({
   content: {
-    gap: spacing.lg
-  },
-  header: {
-    gap: spacing.xs
-  },
-  caption: {
-    fontSize: 13,
-    fontWeight: "800",
-    color: colors.primary
-  },
-  title: {
-    fontSize: 28,
-    lineHeight: 36,
-    fontWeight: "800",
-    color: colors.text
-  },
-  subtitle: {
-    fontSize: 15,
-    lineHeight: 23,
-    color: colors.textMuted
-  },
-  highlightCard: {
-    backgroundColor: colors.surfaceStrong
+    gap: spacing.xl
   },
   highlightLabel: {
-    alignSelf: "flex-start",
-    backgroundColor: colors.primarySoft,
+    ...typography.caption,
     color: colors.primary,
-    fontSize: 12,
-    fontWeight: "800",
-    paddingHorizontal: 10,
-    paddingVertical: 6,
-    borderRadius: 999,
     marginBottom: spacing.sm
   },
   highlightText: {
-    fontSize: 16,
-    lineHeight: 24,
+    ...typography.bodyLg,
     color: colors.text
+  },
+  resultCard: {
+    gap: spacing.xs
   },
   section: {
     marginBottom: spacing.lg
   },
   sectionTitle: {
-    fontSize: 14,
-    fontWeight: "800",
+    ...typography.label,
     color: colors.text,
     marginBottom: spacing.xs
   },
   bodyText: {
-    fontSize: 15,
-    lineHeight: 23,
+    ...typography.bodyMd,
     color: colors.textMuted
   },
   list: {
@@ -165,8 +137,7 @@ const styles = StyleSheet.create({
   },
   listText: {
     flex: 1,
-    fontSize: 15,
-    lineHeight: 23,
+    ...typography.bodyMd,
     color: colors.textMuted
   },
   buttonGroup: {
@@ -175,16 +146,7 @@ const styles = StyleSheet.create({
   emptyContainer: {
     justifyContent: "center"
   },
-  emptyTitle: {
-    fontSize: 22,
-    fontWeight: "800",
-    color: colors.text,
-    marginBottom: spacing.sm
-  },
-  emptyText: {
-    fontSize: 15,
-    lineHeight: 23,
-    color: colors.textMuted,
-    marginBottom: spacing.lg
+  emptyCard: {
+    gap: spacing.lg
   }
 });

@@ -6,6 +6,13 @@ type Phase = 'DOT_CAPTURE' | 'SLOP_CHECK' | 'ENGINEERING_PROBE' | 'ARTIFACT' | '
 
 interface HistoryItem { id: string; idea: string; score: number; date: string; }
 
+const getScoreColor = (score: number) => {
+  if (score >= 80) return '#00FF9D'; // Neon Green
+  if (score >= 60) return '#00E5FF'; // Cyan
+  if (score >= 40) return '#FFB300'; // Amber
+  return '#FF5722';                  // Orange/Red
+};
+
 export default function App() {
   const [phase, setPhase] = useState<Phase>('DOT_CAPTURE');
   const [ideaDot, setIdeaDot] = useState('');
@@ -33,16 +40,14 @@ export default function App() {
     if (ideaDot.trim().length < 10) return;
     setPhase('SLOP_CHECK');
     
-    // Simulating Groq Extraction logic: Picking keywords to formulate specific questions
-    const lowercaseIdea = ideaDot.toLowerCase();
-    const isApp = lowercaseIdea.includes('app') || lowercaseIdea.includes('mobile');
-    const typeLabel = isApp ? 'this mobile ecosystem' : 'this exact platform';
+    // Extract a small snippet to make questions feel tailored
+    const ideaSnippet = ideaDot.length > 25 ? ideaDot.substring(0, 25) + "..." : ideaDot;
     
     const dynamicProbes = [
-      { id: 'problem', label: 'CORE FRICTION (AI GENERATED)', hint: `You proposed a solution, but what is the explicit disease? Why do users hate their current alternative to ${typeLabel}?` },
-      { id: 'user', label: 'PAYING PERSONA (AI GENERATED)', hint: `If someone had to pay $10/mo for this today, who is the literal first person to swipe their card?` },
-      { id: 'scope', label: 'MVP EXCLUSION ZONE', hint: `To build this in 2 weeks, list exactly 3 features you MUST cut from the v1 release.` },
-      { id: 'constraint', label: 'FATAL CONSTRAINTS', hint: `What is the single biggest technical or legal bottleneck (APIs, Server Cost, DB Structure)?` }
+      { id: 'problem', label: 'PROBLEM ISOLATION', hint: `What exact problem does "${ideaSnippet}" solve for the user today?` },
+      { id: 'user', label: 'TARGET AUDIENCE', hint: `Who is the primary target audience that desperately needs this solution?` },
+      { id: 'scope', label: 'MVP SPECIFICATION', hint: `What is the absolute bare-minimum feature set required to launch this?` },
+      { id: 'constraint', label: 'RISK FACTOR', hint: `What is the biggest technical or adoption risk for this idea?` }
     ];
     setProbes(dynamicProbes);
     
@@ -111,10 +116,12 @@ export default function App() {
           {history.length === 0 ? (
             <Text style={styles.historyEmpty}>No dots captured yet.</Text>
           ) : history.map(item => (
-            <View key={item.id} style={styles.historyCard}>
+            <View key={item.id} style={[styles.historyCard, { borderLeftColor: getScoreColor(item.score) }]}>
               <Text style={styles.historyDate}>{item.date}</Text>
               <Text style={styles.historyIdea}>{item.idea.substring(0, 100)}...</Text>
-              <Text style={styles.historyScore}>TRUST SCORE: {item.score}%</Text>
+              <Text style={{ color: getScoreColor(item.score), fontSize: 12, fontWeight: '900', letterSpacing: 0.5 }}>
+                TRUST SCORE: {item.score}%
+              </Text>
             </View>
           ))}
         </ScrollView>
@@ -197,7 +204,15 @@ export default function App() {
         <ScrollView style={styles.artifactCore}>
           <View style={styles.artifactHeader}>
             <Text style={styles.artifactTitle}>GOLDEN SPEC ARTIFACT</Text>
-            <Text style={styles.artifactMeta}>TRUST SCORE: {trustScore}% | ENGINE: LLAMA 3.3 (GROQ)</Text>
+            <View style={{flexDirection: 'row', alignItems: 'center', marginTop: 15, marginBottom: 5}}>
+              <View style={{ width: 64, height: 64, borderRadius: 32, borderWidth: 3, borderColor: getScoreColor(trustScore), alignItems: 'center', justifyContent: 'center', marginRight: 15, backgroundColor: 'rgba(0,0,0,0.3)' }}>
+                <Text style={{ color: getScoreColor(trustScore), fontSize: 20, fontWeight: '900' }}>{trustScore}</Text>
+              </View>
+              <View>
+                 <Text style={{ color: getScoreColor(trustScore), fontSize: 14, fontWeight: 'bold', letterSpacing: 1 }}>CONFIDENCE SCORE</Text>
+                 <Text style={{ color: '#888896', fontSize: 11, marginTop: 2 }}>Engine: LLAMA 3.3 (GROQ)</Text>
+              </View>
+            </View>
           </View>
 
           <View style={styles.artifactSection}>

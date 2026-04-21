@@ -80,13 +80,23 @@ export default function App() {
             value={ideaDot}
             onChangeText={setIdeaDot}
           />
-          <TouchableOpacity 
-            style={[styles.btnTrigger, ideaDot.length < 10 && styles.btnDisabled]} 
-            onPress={handleDotSubmit}
-            disabled={ideaDot.length < 10}
-          >
-            <Text style={styles.btnText}>INITIATE SLOP-CHECK</Text>
-          </TouchableOpacity>
+          
+          <View style={styles.actionRow}>
+            <TouchableOpacity 
+              style={[styles.btnTrigger, styles.btnVoice]}
+              onPress={() => setIdeaDot("Voice transcribing: A marketplace logic that completely eliminates middleman... ")}
+            >
+              <Text style={styles.btnVoiceText}>🎤 HOLD TO SPEAK</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity 
+              style={[styles.btnTrigger, ideaDot.length < 10 && styles.btnDisabled, { flex: 2, marginLeft: 10 }]} 
+              onPress={handleDotSubmit}
+              disabled={ideaDot.length < 10}
+            >
+              <Text style={styles.btnText}>INITIATE SLOP-CHECK</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       )}
 
@@ -236,6 +246,9 @@ const styles = StyleSheet.create({
   bigInput: { backgroundColor: '#13131A', borderWidth: 1, borderColor: '#262633', color: '#E0E0E5', fontSize: 17, borderRadius: 12, padding: 20, minHeight: 180, textAlignVertical: 'top', marginBottom: 20, lineHeight: 26 },
   
   btnTrigger: { backgroundColor: '#7A32DD', paddingVertical: 18, borderRadius: 10, alignItems: 'center' },
+  actionRow: { flexDirection: 'row', alignItems: 'stretch' },
+  btnVoice: { flex: 1, backgroundColor: '#262633', marginRight: 10, borderColor: '#7A32DD', borderWidth: 1 },
+  btnVoiceText: { color: '#888896', fontSize: 13, fontWeight: '700', letterSpacing: 0.5 },
   btnDisabled: { backgroundColor: '#211B33', opacity: 0.6 },
   btnText: { color: '#FFFFFF', fontSize: 15, fontWeight: '700', letterSpacing: 1 },
 

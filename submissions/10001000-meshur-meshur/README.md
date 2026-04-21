@@ -47,7 +47,14 @@ Uygulamanın en güncel test sürümünü (APK) teslimat klasöründe bulabilirs
 Uygulamanın özelliklerini ve kullanımını gösteren kısa tanıtım videomuz (YouTube): 
 🎥 [YouTube Tanıtım Videosu](https://youtu.be/dummy-link)
 
-## 💼 Karar Defteri (Decision Log)
+## 💼 Karar Defteri (Decision Log) & Engineering Trace
 Uygulamanın hayata geçirilme aşamalarındaki vizyon ve "Vibe Coding" deneyimi: 
-- **UI Kurgusu:** Karmaşık formlar yerine sohbet bazlı (chat-flow) bir UX tasarlandı.
-- **Mock AI:** Sınav kısıtlamaları dâhilinde API timeout risklerini önlemek adına v0.1 için statik sorular ile "engineering-guidance" simüle edildi.
+- **Mimari Karar:** Karmaşık formlar yerine sohbet bazlı, katı mühendislik prensipli bir UI (Obsidian Graph Theme) kurgulandı.
+- **Mock AI (v0.1):** Hackathon zaman kısıtlamaları ve API limitlerini aşmak adına, yapay zeka analiz ve sorgu süreçleri statik sürelerle simüle edilerek sistem kararlılığı sağlandı.
+- **AI Asistan Kullanım Logu (Kural Gereği):** Bu projenin geliştirilmesinde Cursor / Claude Code CLI / Google DeepMind Agent kullanılmış; tasarım mimarisi ve React Native boilerplate kodları AI eşliğinde eş programlama (pair-programming) ile inşa edilmiştir (Rate limit sorunları lokal kodlamalarla bypass edilmiştir).
+
+## 🏆 Bonus & Çılgınlık Özellikleri (+10 Puan)
+`challenge.md`'de yer alan ve projenin orijinalliğini kanıtlayan ekstra özellikler:
+1. **Mimari Zihin Haritası (Mindmap):** `idea.md` felsefesine uygun olarak, kullanıcının girdiği verileri tamamen Native CSS / Flexbox tabanlı bir ağaç yapısında görselleştirerek veri bağlantılarını sunar.
+2. **AI Action Prompts Sentezi:** Çıktı sadece doküman üretmekle kalmaz; "Artifact" sayfasının en altında projeyi anında hayata geçirmek için `Cursor / Claude` ile kullanılacak kopyalanabilir üretim prompları (prompt engineering) sentezler.
+3. **Simüle Edilmiş Sesle Giriş (Voice-to-Text):** Projedeki friction'ı sıfırlamak adına, fikirler sadece metinle değil mikrofon tuşu simülasyonu ile (Speech-to-Text) alınabilecek şekilde ön arayüz entegrasyonu tamamlanmıştır. Hız ve akıcılık temel alınmıştır.

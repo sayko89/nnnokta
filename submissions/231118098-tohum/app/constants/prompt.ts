@@ -139,10 +139,5 @@ export const RUBRIC_LABELS: Record<(typeof RUBRIC_KEYS)[number], string> = {
   ozet: 'Özet',
 };
 
-// Tohum'un kullandığı LLM. EAS Build'de değiştirmeye gerek olmayacak şekilde
-// sabit tutuluyor; değişirse tek dosyadan değişir.
-export const TOHUM_MODEL = 'claude-sonnet-4-6';
-
-// Streaming yerine tek atış kullanıyoruz çünkü JSON response parse edilecek;
-// streaming parçalı JSON parse etmeyi zorlaştırır.
-export const TOHUM_MAX_TOKENS = 2048;
+// Model ismi her provider'ın kendi dosyasında yaşar (services/ai/providers/*).
+// Prompt bu yüzden model-agnostic; tek kontrat JSON çıkışı ve slop yasakları.

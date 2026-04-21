@@ -24,7 +24,7 @@ import {
   type RubricState,
 } from '@/constants/schema';
 import { colors, fontSize, radius, spacing, typography } from '@/constants/theme';
-import { askNokta, TohumAiError } from '@/services/nokta-ai';
+import { askNokta, TohumAiError } from '@/services/ai';
 
 type Status = 'idle' | 'thinking' | 'error';
 

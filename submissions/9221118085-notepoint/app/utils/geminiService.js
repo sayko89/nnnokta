@@ -1,6 +1,6 @@
 // utils/geminiService.js
 
-const GEMINI_KEY = "AIzaSyB0vkVEnljIUihZkHezPwcie8uOYZdKZkc";
+const GEMINI_KEY = process.env.EXPO_PUBLIC_GEMINI_KEY;
 
 // ✅ Pre-configured with your CONFIRMED working model
 let workingModel = "gemini-2.5-flash-lite"; // Set directly for speed

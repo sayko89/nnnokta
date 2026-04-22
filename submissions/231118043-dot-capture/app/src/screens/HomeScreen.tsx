@@ -30,32 +30,32 @@ export default function HomeScreen({ navigation }: Props) {
         <View style={styles.header}>
           <Text style={styles.dot}>·</Text>
           <Text style={styles.title}>NOKTA</Text>
-          <Text style={styles.subtitle}>Dot Capture & Enrich</Text>
+          <Text style={styles.subtitle}>Fikir Yakalama ve Geliştirme</Text>
         </View>
 
-        <Text style={styles.label}>Your raw idea</Text>
+        <Text style={styles.label}>Ham fikrin</Text>
         <TextInput
           style={styles.input}
           multiline
           numberOfLines={6}
-          placeholder="Describe your idea in one or two sentences. Don't filter yourself — just capture the dot."
+          placeholder="Fikrini bir iki cümleyle anlat. Filtreleme — sadece noktayı yakala."
           placeholderTextColor="#666"
           value={idea}
           onChangeText={setIdea}
           textAlignVertical="top"
         />
-        <Text style={styles.charCount}>{idea.trim().length} chars{idea.trim().length < 10 ? ' (min 10)' : ''}</Text>
+        <Text style={styles.charCount}>{idea.trim().length} karakter{idea.trim().length < 10 ? ' (min 10)' : ''}</Text>
 
         <TouchableOpacity
           style={[styles.button, !canProceed && styles.buttonDisabled]}
           onPress={() => navigation.navigate('Questions', { idea: idea.trim() })}
           disabled={!canProceed}
         >
-          <Text style={styles.buttonText}>Capture →</Text>
+          <Text style={styles.buttonText}>Yakala →</Text>
         </TouchableOpacity>
 
         <Text style={styles.hint}>
-          AI will ask 5 engineering questions to sharpen your idea into a spec.
+          AI fikrni spec'e dönüştürmek için 5 mühendislik sorusu soracak.
         </Text>
       </ScrollView>
     </KeyboardAvoidingView>

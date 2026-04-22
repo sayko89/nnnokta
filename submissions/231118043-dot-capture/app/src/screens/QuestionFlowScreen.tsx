@@ -43,7 +43,7 @@ export default function QuestionFlowScreen({ navigation, route }: Props) {
       const q = await askNextQuestion(idea, qas, questionIndex);
       setCurrentQuestion(q.trim());
     } catch (e: any) {
-      setError(e.message ?? 'Failed to load question. Check your API key.');
+      setError(e.message ?? 'Soru yüklenemedi. API key\'ini kontrol et.');
     } finally {
       setLoading(false);
     }
@@ -73,7 +73,7 @@ export default function QuestionFlowScreen({ navigation, route }: Props) {
           <View style={[styles.progressFill, { width: `${progress * 100}%` }]} />
         </View>
         <Text style={styles.progressLabel}>
-          Question {questionIndex + 1} of {TOTAL_QUESTIONS}
+          Soru {questionIndex + 1} / {TOTAL_QUESTIONS}
         </Text>
 
         {/* Idea pill */}
@@ -89,7 +89,7 @@ export default function QuestionFlowScreen({ navigation, route }: Props) {
             <View>
               <Text style={styles.errorText}>{error}</Text>
               <TouchableOpacity style={styles.retryBtn} onPress={loadQuestion}>
-                <Text style={styles.retryText}>Retry</Text>
+                <Text style={styles.retryText}>Tekrar Dene</Text>
               </TouchableOpacity>
             </View>
           ) : (
@@ -104,7 +104,7 @@ export default function QuestionFlowScreen({ navigation, route }: Props) {
               style={styles.answerInput}
               multiline
               numberOfLines={4}
-              placeholder="Your answer…"
+              placeholder="Cevabın…"
               placeholderTextColor="#555"
               value={currentAnswer}
               onChangeText={setCurrentAnswer}
@@ -116,7 +116,7 @@ export default function QuestionFlowScreen({ navigation, route }: Props) {
               disabled={!currentAnswer.trim()}
             >
               <Text style={styles.nextBtnText}>
-                {questionIndex + 1 < TOTAL_QUESTIONS ? 'Next →' : 'Generate Spec ✦'}
+                {questionIndex + 1 < TOTAL_QUESTIONS ? 'Devam →' : 'Spec Oluştur ✦'}
               </Text>
             </TouchableOpacity>
           </>

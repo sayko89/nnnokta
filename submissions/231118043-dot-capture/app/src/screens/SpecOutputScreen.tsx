@@ -35,7 +35,7 @@ export default function SpecOutputScreen({ navigation, route }: Props) {
       const result = await generateSpec(idea, qas);
       setSpec(result.trim());
     } catch (e: any) {
-      setError(e.message ?? 'Failed to generate spec. Check your API key.');
+      setError(e.message ?? 'Spec oluşturulamadı. API key\'ini kontrol et.');
     } finally {
       setLoading(false);
     }
@@ -43,7 +43,7 @@ export default function SpecOutputScreen({ navigation, route }: Props) {
 
   async function handleShare() {
     try {
-      await Share.share({ message: `NOKTA Spec\n\nIdea: ${idea}\n\n${spec}` });
+      await Share.share({ message: `NOKTA Spec\n\nFikir: ${idea}\n\n${spec}` });
     } catch (_) {}
   }
 
@@ -77,12 +77,12 @@ export default function SpecOutputScreen({ navigation, route }: Props) {
       <ScrollView contentContainerStyle={styles.inner}>
         <View style={styles.headerRow}>
           <View>
-            <Text style={styles.title}>One-Page Spec</Text>
+            <Text style={styles.title}>Tek Sayfa Spec</Text>
             <Text style={styles.ideaLabel} numberOfLines={1}>{idea}</Text>
           </View>
           {!loading && !error && (
             <TouchableOpacity style={styles.shareBtn} onPress={handleShare}>
-              <Text style={styles.shareBtnText}>Share</Text>
+              <Text style={styles.shareBtnText}>Paylaş</Text>
             </TouchableOpacity>
           )}
         </View>
@@ -90,7 +90,7 @@ export default function SpecOutputScreen({ navigation, route }: Props) {
         {loading && (
           <View style={styles.loadingBox}>
             <ActivityIndicator color="#6c47ff" size="large" />
-            <Text style={styles.loadingText}>Generating your spec…</Text>
+            <Text style={styles.loadingText}>Spec oluşturuluyor…</Text>
           </View>
         )}
 
@@ -98,7 +98,7 @@ export default function SpecOutputScreen({ navigation, route }: Props) {
           <View>
             <Text style={styles.errorText}>{error}</Text>
             <TouchableOpacity style={styles.retryBtn} onPress={loadSpec}>
-              <Text style={styles.retryText}>Retry</Text>
+              <Text style={styles.retryText}>Tekrar Dene</Text>
             </TouchableOpacity>
           </View>
         )}
@@ -113,7 +113,7 @@ export default function SpecOutputScreen({ navigation, route }: Props) {
           style={styles.startOverBtn}
           onPress={() => navigation.popToTop()}
         >
-          <Text style={styles.startOverText}>· New Idea</Text>
+          <Text style={styles.startOverText}>· Yeni Fikir</Text>
         </TouchableOpacity>
       </View>
     </View>

@@ -1,5 +1,5 @@
 const API_KEY = process.env.EXPO_PUBLIC_GEMINI_API_KEY ?? '';
-const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`;
+const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API_KEY}`;
 
 export interface QA {
   question: string;
@@ -7,11 +7,11 @@ export interface QA {
 }
 
 const QUESTION_CATEGORIES = [
-  'Problem: What specific pain point does this solve?',
-  'User: Who is the primary user and what is their context?',
-  'Scope: What is the minimum viable version of this idea?',
-  'Constraint: What are the biggest technical or resource constraints?',
-  'Success Metric: How will you measure if this idea succeeded?',
+  'Problem (Sorun): Bu fikir hangi spesifik sorunu çözüyor?',
+  'User (Kullanıcı): Birincil kullanıcı kim ve bağlamı nedir?',
+  'Scope (Kapsam): Bu fikrin minimum geçerli versiyonu nedir?',
+  'Constraint (Kısıt): En büyük teknik veya kaynak kısıtları nelerdir?',
+  'Success Metric (Başarı Ölçütü): Fikrin başarısını nasıl ölçeceksin?',
 ];
 
 async function callGemini(systemPrompt: string, userMessage: string): Promise<string> {
@@ -41,9 +41,9 @@ export async function askNextQuestion(
 ): Promise<string> {
   const category = QUESTION_CATEGORIES[questionIndex] ?? QUESTION_CATEGORIES[4];
 
-  const systemPrompt = `You are a concise engineering advisor helping refine a raw idea into a spec.
-Ask ONE focused question in this category: "${category}".
-Keep the question under 20 words. Do NOT give explanations or preamble — just the question.`;
+  const systemPrompt = `Sen ham fikirleri spec'e dönüştüren bir mühendislik danışmanısın. Türkçe yanıt ver.
+Bu kategoride TEK bir odaklı soru sor: "${category}".
+Soruyu 20 kelimede tut. Açıklama veya giriş yapma — sadece soruyu yaz.`;
 
   const history = previousQAs
     .map((qa, i) => `Q${i + 1}: ${qa.question}\nA${i + 1}: ${qa.answer}`)
@@ -55,16 +55,16 @@ Keep the question under 20 words. Do NOT give explanations or preamble — just 
 }
 
 export async function generateSpec(idea: string, qas: QA[]): Promise<string> {
-  const systemPrompt = `You are a product spec writer. Based on the idea and Q&A, write a concise one-page engineering spec.
-Use these exact sections:
-## Problem
-## Target Users
-## Scope (MVP)
-## Constraints
-## Success Metrics
-## First Feature to Build
+  const systemPrompt = `Sen bir ürün spec yazarısın. Fikir ve soru-cevaplara dayanarak kısa bir tek sayfalık mühendislik spec'i yaz. Türkçe yaz.
+Şu bölümleri kullan:
+## Sorun
+## Hedef Kullanıcılar
+## Kapsam (MVP)
+## Kısıtlar
+## Başarı Ölçütleri
+## İlk Yapılacak Özellik
 
-Be concrete and direct. No fluff. Total length: ~300 words.`;
+Somut ve direkt ol. Gereksiz söz yok. Toplam uzunluk: ~300 kelime.`;
 
   const history = qas.map((qa, i) => `Q${i + 1}: ${qa.question}\nA${i + 1}: ${qa.answer}`).join('\n\n');
 

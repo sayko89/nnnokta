@@ -30,7 +30,7 @@ Duplicates are removed intelligently: "- Buy Milk", "buy milk", and "• buy mil
 
 ```bash
 # 1. Navigate to the app folder
-cd submissions/2021xxxx-nokta/app
+cd submissions/241478074-nokta/app
 
 # 2. Install dependencies
 npm install
